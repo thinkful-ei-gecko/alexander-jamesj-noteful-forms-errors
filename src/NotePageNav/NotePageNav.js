@@ -25,7 +25,6 @@ export default class NotePageNav extends React.Component {
     return (
       <div className='NotePageNav'>
         <CircleButton
-          tag='button'
           role='link'
           onClick={() => this.props.history.goBack()}
           className='NotePageNav__back-button'
