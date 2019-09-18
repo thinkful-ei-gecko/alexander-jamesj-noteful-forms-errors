@@ -82,12 +82,31 @@ class App extends Component {
   handleAddFolder = newFolder => {
     this.setState({
       folders: [...this.state.folders, newFolder],
+      newFolder: {
+        hasError: false,
+        touched: false,
+        name: '',
+      }
     })
   }
 
   handleAddNote = note => {
     this.setState({
       notes: [...this.state.notes, note],
+      newNote: {
+        name: {
+          touched: false,
+          value: '',
+        },
+        folderId: {
+          touched: false,
+          value: '',
+        },
+        content: {
+          touched: false,
+          value: '',
+        },
+      }
     })
   }
   handleDeleteNote = noteId => {

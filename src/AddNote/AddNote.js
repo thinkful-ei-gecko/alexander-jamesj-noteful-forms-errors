@@ -27,15 +27,20 @@ export default class AddNote extends React.Component {
     ))
   }
 
+  handleRedirect = () => {
+    this.props.history.goBack()
+  }
+
   handleFormSubmit = e => {
     e.preventDefault(e)
     const newNote = {
       name: e.target.name.value,
-      content: e.target.desc.value,
+      content: e.target.content.value,
       folderId: e.target.folders.value,
       modified: new Date(),
     }
     this.addNewNote(newNote)
+    this.handleRedirect()
   }
 
   validateName = () => {
@@ -66,7 +71,9 @@ export default class AddNote extends React.Component {
         />
         <label htmlFor="content">
           Description
-          {this.context.newNote.content.touched && <p>{this.validateDescription()}</p>}
+          {this.context.newNote.content.touched && (
+            <p>{this.validateDescription()}</p>
+          )}
         </label>
         <input
           type="text"
@@ -77,7 +84,15 @@ export default class AddNote extends React.Component {
         />
         <label htmlFor="folders">Select a Folder</label>
         <select name="folders">{this.parseFolders()}</select>
-        <button type="submit">Submit</button>
+        <button
+          type="submit"
+          disabled={
+            this.context.newNote.content.value.length === 0 ||
+            this.context.newNote.name.value.length === 0
+          }
+        >
+          Submit
+        </button>
       </form>
     )
   }
